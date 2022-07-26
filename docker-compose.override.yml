@@ -1,0 +1,26 @@
+#####################################
+# DOCKER COMPOSE OVERRIDE SCRIPT    #
+# release 1.0                       #
+# developed by Francesco Sorrentino #
+#####################################
+
+version: '3.7'
+
+networks:
+  servicenetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/24
+
+services:
+  database:
+    networks:
+      servicenetwork:
+        ipv4_address: 172.16.0.10
+
+  phpmyadmin:
+    networks:
+      servicenetwork:
+        ipv4_address: 172.16.0.11

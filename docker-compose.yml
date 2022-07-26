@@ -1,0 +1,37 @@
+#####################################
+# DOCKER COMPOSE SCRIPT             #
+# release 1.0                       #
+# developed by Francesco Sorrentino #
+#####################################
+
+version: "3.7"
+
+services:
+  database:
+    image: "mariadb:latest"
+    container_name: "mysql"
+    restart: "always"
+    command: ["--max_allowed_packet=32505856", "--max_connection=2500"]
+    environment:
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "rootpwd"
+    ports:
+      - "6500:3306"
+    expose:
+      - "6500"
+    volumes:
+      - "mysql-data:/var/lib/mysql"
+      - "../mysql-dump:/docker-entrypoint-initdb.d"
+
+  phpmyadmin:
+    image: "phpmyadmin:latest"
+    restart: "always"
+    container_name: "phpmyadmin"
+    ports:
+      - "9001:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PMA_HOST: "host.docker.internal"
+      PMA_PORT: "6500"
