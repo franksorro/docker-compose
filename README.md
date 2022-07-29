@@ -14,6 +14,7 @@ A Docker script with some configured services:
 
 - MariaDB
 - PhpMyAdmin
+- Memcached
 
 ## Commit legend:
 ```sh

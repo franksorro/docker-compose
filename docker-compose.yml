@@ -1,6 +1,6 @@
 #####################################
 # DOCKER COMPOSE SCRIPT             #
-# release 1.0                       #
+# release 1.1                       #
 # developed by Francesco Sorrentino #
 #####################################
 
@@ -35,3 +35,15 @@ services:
     environment:
       PMA_HOST: "host.docker.internal"
       PMA_PORT: "6500"
+
+  memcached:
+    image: "memcached:latest"
+    container_name: "memcached"
+    restart: "always"
+    ports:
+      - "11211:11211"
+    expose:
+      - "11211"
+
+volumes:
+  mysql-data:
